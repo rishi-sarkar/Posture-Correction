@@ -2,7 +2,7 @@ import socket
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-from scipy.interpolate import make_interp_spline
+from scipy.interpolate import PchipInterpolator
 
 # UDP connection parameters
 UDP_IP = "192.168.4.2"  # This should match the ESP32 access point's IP
@@ -108,7 +108,7 @@ while True:
         roll_current = [roll_data[i][-1] for i in range(4)]
 
         # Create a spline based on the roll data
-        spline = make_interp_spline(sensor_indices, roll_current, k=3)
+        spline = PchipInterpolator(sensor_indices, roll_current)
         spline_indices = np.linspace(1, 4, 100)
         spline_values = spline(spline_indices)
 
