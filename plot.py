@@ -67,6 +67,7 @@ last_print_time = time.time()  # For 20ms print timing
 def calculate_pitch_roll(ax_val, ay_val, az_val):
     pitch = np.arctan2(ay_val, np.sqrt(ax_val**2 + az_val**2)) * (180 / np.pi)
     roll = np.arctan2(-ax_val, az_val) * (180 / np.pi)
+    roll = -(roll+90)
     return pitch, roll
 
 
